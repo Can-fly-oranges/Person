@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+	body {
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+	/*标题*/
+	.header, .header p, .bx, .bx p {
+		position: relative;
+	}
+	.header {
+		margin: 0 auto;
+		width: 70%;
+		min-width: 720px;
+	}
+	.header p{
+		top: 40px;
+		font: 100 32px/1em '微软雅黑';
+		transform:scale(1) rotate(0);
+		transition: 1.2s;
+	}
+	.header .ak{
+		margin: -52px 0 0 -72px;
+		transform:scale(1.6) rotate(10deg);
+	}
+
+	/*排行内容*/
+	.bx {
+		margin: 72px auto 0;
+		width: 70%;
+		min-width: 720px;
+		height: 650px;
+		/*background-color: #f0f0f0;*/
+		overflow: hidden;
+	}
+	.bx p {
+		text-align: center;
+		margin:  0 0 12px 32px;
+		padding: 15px 0;
+		font: normal 15px/1em '微软雅黑';
+		opacity: 0;
+		background-color: #f0f0f0;
+		color: #808080;
+		transition: .5s;
+	}
+	.bx p:hover {
+		background-color: #FFCCCC;
+	}
+	.bx p:before{
+		position: absolute;
+		display: block;
+		text-indent: 12px;
+		top: 15px
+	}
+	.bx p:nth-child(1){
+		color: #FF6666;
+		font-size: 18px
+	}
+	.bx p:nth-child(1):before{
+		content: '1.st'
+	}
+	.bx p:nth-child(2){
+		color: #66CCCC;
+		font-size: 17px
+	}
+	.bx p:nth-child(2):before{
+		content: '2.st'
+	}
+	.bx p:nth-child(3){
+		color: #66CCFF;
+		font-size: 16px
+	}
+	.bx p:nth-child(3):before{
+		content: '3.st'
+	}
+	.bx p:nth-child(4):before{
+		content: '4.st'
+	}
+	.bx p:nth-child(5):before{
+		content: '5.st'
+	}
+	.bx p:nth-child(6):before{
+		content: '6.st'
+	}
+	.bx p:nth-child(7):before{
+		content: '7.st'
+	}
+	.bx p:nth-child(8):before{
+		content: '8.st'
+	}
+	.bx p:nth-child(9):before{
+		content: '9.st'
+	}
+	.bx p:nth-child(10):before{
+		content: '10.st'
+	}
+	.bx .s {
+		opacity: 1;
+		margin-left: 0;
+	}
+	.bx .d {
+		opacity: 0;
+		margin-top: 32px;
+	}
+
+	/*按钮*/
+	.bun {
+		margin: 0 auto;
+		width: 160px;
+	}
+	.bun button{
+		display: block;
+		padding: 6px 8px;
+		font: normal 12px/1em '微软雅黑';
+		color: #333;
+		border: none;
+		outline：none;
+	}
+	.bun button:nth-child(1){
+		float: left;
+	}
+	.bun button:nth-child(2){
+		float: right;
+	}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<p id="hp" class="ak">今日足球排名</p>
+	</div>
+	<div class="bx" id="box"></div>
+	<!-- <div class="bun"><button onclick="P.stime(data)">点我展示</button>
+	<button onclick="P.dtime()">点我消除</button></div> -->
+</body>
+<script>
+	var box = document.getElementById('box');
+	var hp = document.getElementById('hp');
+	var data = [
+		{ "name":"村长", "age":"15", "gender":"男" },
+		{ name:'秋容', age:18, gender:'女' },
+		{ name:'朱大饼', age:21, gender:'男' },
+		{ name:'张大娘', age:42, gender:'女' },
+		{ name:'二货', age:15, gender:'男' },
+		{ name:'葛优', age:18, gender:'女' },
+		{ name:'比利', age:21, gender:'男' },
+		{ name:'司马老贼', age:42, gender:'女' },
+		{ name:'村长', age:15, gender:'男' },
+		{ name:'秋容', age:18, gender:'女' },
+		/*{ name:'朱大饼', age:21, gender:'男' },
+		{ name:'张大娘', age:42, gender:'女' },
+		{ name:'二货', age:15, gender:'男' },
+		{ name:'葛优', age:18, gender:'女' },
+		{ name:'比利', age:21, gender:'男' },
+		{ name:'司马老贼', age:42, gender:'女' },
+		{ name:'村长', age:15, gender:'男' },
+		{ name:'秋容', age:18, gender:'女' },
+		{ name:'朱大饼', age:21, gender:'男' },
+		{ name:'张大娘', age:42, gender:'女' },
+		{ name:'二货', age:15, gender:'男' },
+		{ name:'葛优', age:18, gender:'女' },
+		{ name:'比利', age:21, gender:'男' },
+		{ name:'司马老贼', age:42, gender:'女' },
+		{ name:'村长', age:15, gender:'男' },
+		{ name:'秋容', age:18, gender:'女' },
+		{ name:'朱大饼', age:21, gender:'男' },
+		{ name:'张大娘', age:42, gender:'女' },
+		{ name:'二货', age:15, gender:'男' },
+		{ name:'葛优', age:18, gender:'女' },
+		{ name:'比利', age:21, gender:'男' },
+		{ name:'司马老贼', age:42, gender:'女' }*/
+	];
+
+	var P = {
+		//打印全部数组
+		loop : function(v){
+			for (var i = 0, bl = v.length; i < bl; i++){
+				box.innerHTML += '大家好我叫' + v[i].name + '，今年' + v[i].age + '岁，' + '是一个健康的' + v[i].gender + '性</br>'
+			}
+		},
+		//延时输出查看
+		stime : function(v){
+			var i = 0, bl = v.length;
+			var st = setInterval(function(){
+					if (i < bl){
+						P.tshow(v[i].name, v[i].age, v[i].gender);
+						i++
+					} else {
+						clearInterval(st)
+					}
+				}, 60)
+		},
+		//组装函数
+		tshow : function(n, a, g){
+			var sp = document.createElement('p');
+			sp.innerHTML = '大家好我叫' + n + '，今年' + a + '岁，' + '是一个健康的' + g + '性</br>';
+			box.appendChild(sp);
+			setTimeout(function(){
+				sp.setAttribute('class','s')
+			}, 50)
+		},
+		//延迟删除
+		dtime : function(v){
+			var i = box.getElementsByTagName('p').length;
+			var dt = setInterval(function(){
+				if (i == 0){
+					clearInterval(dt)
+				} else {
+					i--;
+					P.tdel(i);
+				}
+			}, 60)
+		},
+		//组装函数
+		tdel : function(n){
+			var bl = box.getElementsByTagName('p')[n];
+			bl.setAttribute('class','d');
+			setTimeout(function(){
+				box.removeChild(bl)
+			}, 600)
+		}
+	};
+
+	onload = function(){
+		P.stime(data);
+		hp.removeAttribute('class')
+	}
+
+</script>
+</html>
